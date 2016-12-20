@@ -7,6 +7,10 @@ var bodyParser = require('body-parser');
 
 var world = require('./routes/world');
 var users = require('./routes/users');
+var tech = require('./routes/tech');
+var internet = require('./routes/internet');
+var phone = require('./routes/phone');
+
 var app = express();
 
 // view engine setup
@@ -23,6 +27,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/world', world);
 app.use('/users', users);
+app.use('/tech',tech);
+app.use('/phone',phone);
+app.use('/internet',internet);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
