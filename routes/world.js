@@ -51,7 +51,7 @@ function load_news_list(url, offset,count,callback) {
                 })
                 console.log(index,end)
                 for (var i=0;i<index;i++){
-                    items.shift()
+                    items.pop()
                 }
                 callback(items)
                 console.dir(sres.body.toString())
