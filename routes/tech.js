@@ -4,7 +4,7 @@ var router = express.Router();
 /* GET home page. */
 router.get('/', function (req, res, next) {
     //res.render('world', {title: 'Express'});
-    load_news_list(main_url, function (items) {
+    load_news_list(main_url,req.query.offset,req.query.count, function (items) {
         res.send(items)
     })
 });
@@ -18,9 +18,13 @@ var cheerio = require('cheerio');
 const charset = require('superagent-charset');
 var fs = require('fs');
 var path = require('path');
-var main_url = 'http://c.m.163.com/nc/article/list/T1348649580692/0-20.html';
+var main_url = 'http://c.m.163.com/nc/article/list/T1348649580692/';
 charset(superagent);
-function load_news_list(url, callback) {
+function load_news_list(url,offset,count, callback) {
+    if(offset ===undefined)offset = 0
+    if(count ===undefined)count = 10
+    index = count*offset
+    url+=index+'-'+(index+20)+'.html';
     console.log('开始抓取 ' + url)
     superagent
         .get(url)
