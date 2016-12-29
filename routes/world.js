@@ -23,8 +23,8 @@ charset(superagent);
 function load_news_list(url, offset,count,callback) {
     if(offset ===undefined)offset = 0
     if(count ===undefined)count = 10
-    index = count*offset
-    end = Number(index)+Number(count);
+    var index = count*offset
+    var end = parseInt(index)+ parseInt(count);
     url+=index+'-'+ end +'.html';
     console.log('开始抓取 ' + url)
     superagent
@@ -49,7 +49,10 @@ function load_news_list(url, offset,count,callback) {
                     item.date = newsItem.lmodify
                     items.push(item)
                 })
-
+                console.log(index,end)
+                for (var i=0;i<index;i++){
+                    items.shift()
+                }
                 callback(items)
                 console.dir(sres.body.toString())
                 console.dir(JSON.stringify(sres.body))

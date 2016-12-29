@@ -49,7 +49,9 @@ function load_news_list(url,offset,count, callback) {
                     item.date = newsItem.lmodify
                     items.push(item)
                 })
-
+                for (var i=0;i<index;i++){
+                    items.shift()
+                }
                 callback(items)
                 console.dir(sres.body.toString())
                 console.dir(JSON.stringify(sres.body))
